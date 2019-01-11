@@ -17,8 +17,15 @@ namespace VLTPAuth
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+
+      // export APPSETTINGS_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/MySQL"
+      public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+          WebHost.CreateDefaultBuilder(args)
+              .ConfigureAppConfiguration((hostingContext, config) =>
+              {
+                  config.SetBasePath(Environment.GetEnvironmentVariable("APPSETTINGS_DIRECTORY"));
+                  config.AddJsonFile("VLTPAuth_appsettings.json", optional: false, reloadOnChange: true);
+              })
+              .UseStartup<Startup>();                
     }
 }

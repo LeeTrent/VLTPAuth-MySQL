@@ -9,7 +9,7 @@ using VLTPAuth.Data;
 namespace VLTPAuth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190111191208_InitialDataModel")]
+    [Migration("20190111211236_InitialDataModel")]
     partial class InitialDataModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,11 +193,6 @@ namespace VLTPAuth.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("MiddleName");
 
                     b.ToTable("ApplicationUser");
 
