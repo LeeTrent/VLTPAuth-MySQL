@@ -103,7 +103,7 @@ namespace VLTPAuth
             string logFileDirectory = Environment.GetEnvironmentVariable("LOGFILE_DIRECTORY");
             if ( String.IsNullOrEmpty(logFileDirectory) == false)
             {
-                loggerFactory.AddFile(logFileDirectory + "/VLTPAuth-{Date}.txt");
+                loggerFactory.AddFile(logFileDirectory + "/VLTPAuth-{Date}.log");
             }             
         }
     }
