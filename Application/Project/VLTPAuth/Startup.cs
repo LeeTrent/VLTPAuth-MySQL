@@ -61,6 +61,7 @@ namespace VLTPAuth
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySQL(
                     Configuration.GetConnectionString("DefaultConnection")));
+                    
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
