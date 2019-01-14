@@ -45,7 +45,8 @@ namespace VLTPAuth.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<byte>(type: "tinyint(1)", nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    SSN = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

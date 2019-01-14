@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using VLTPAuth.Data;
 
 namespace VLTPAuth.Areas.Identity.Pages.Account
 {
@@ -110,8 +111,12 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
               //    a. User is authenticated against EEX
               //    b. Try to register user if they're not already registered
               ////////////////////////////////////////////////////////////////////////////////
-              var identityUser = new IdentityUser { UserName = Input.SSN, Email = Input.SSN };
-              var identityResult = await _userManager.CreateAsync(identityUser, Input.Password);
+            //   var identityUser = new IdentityUser { UserName = Input.SSN, Email = Input.SSN };
+            //   var identityResult = await _userManager.CreateAsync(identityUser, Input.Password);
+
+              var appUser = new ApplicationUser { UserName = Input.SSN, Email = Input.SSN, SSN = Input.SSN};
+              var identityResult = await _userManager.CreateAsync(appUser, Input.Password);
+
               if ( identityResult.Succeeded == false
                       && this.isDuplicateUser(identityResult.Errors) == false)
               {
@@ -149,7 +154,7 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
                   // 3. Login attempt was successful
                   // 4. Check to see if 2-factor authentication has been enabled
                   ////////////////////////////////////////////////////////////////////////////////                  
-                  identityUser = await _signInManager.UserManager.FindByNameAsync(Input.SSN);
+                  var identityUser = await _signInManager.UserManager.FindByNameAsync(Input.SSN);
                   _logger.LogInformation("[Login][OnPost] => identityUser.TwoFactorEnabled: " + identityUser.TwoFactorEnabled);
                   if ( identityUser.TwoFactorEnabled == false)
                   {

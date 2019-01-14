@@ -191,6 +191,8 @@ namespace VLTPAuth.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("SSN")
+                        .IsRequired();
 
                     b.ToTable("ApplicationUser");
 
