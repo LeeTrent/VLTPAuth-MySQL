@@ -89,8 +89,10 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
               _logger.LogInformation("[Login][OnPost] => _eexAuthService.IsAuthorized: "
                   + _eexAuthService.IsAuthorized(Input.SSN, Input.Password));
               
+              ////////////////////////////////////////////////////////////////////////////////              
+              // EEX
               ////////////////////////////////////////////////////////////////////////////////
-              // Authenticate against EEX using SSN and PIN
+              // 1. Authenticate against EEX using SSN and PIN
               ////////////////////////////////////////////////////////////////////////////////
               if ( _eexAuthService.IsAuthorized(Input.SSN, Input.Password) == false)
               {
@@ -102,8 +104,11 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
               _logger.LogInformation("[Login][OnPost] => EEX authentication succeeded - attempting user registration/duplicate user check");
               
               ////////////////////////////////////////////////////////////////////////////////
-              // 1. User is authenticated against EEX
-              // 2. Try to register user if they're not already registered
+              // REGISTER
+              ////////////////////////////////////////////////////////////////////////////////
+              // Register user in our Identity Framework System (if not already registered)
+              //    a. User is authenticated against EEX
+              //    b. Try to register user if they're not already registered
               ////////////////////////////////////////////////////////////////////////////////
               var identityUser = new IdentityUser { UserName = Input.SSN, Email = Input.SSN };
               var identityResult = await _userManager.CreateAsync(identityUser, Input.Password);
@@ -118,9 +123,12 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
               _logger.LogInformation("[Login][OnPost] => User registration/duplicate user check succeeded - attempting password sign-in");
 
                 ////////////////////////////////////////////////////////////////////////////////
-                // 1. User is authenticated against EEX
-                // 2. User is registered in our system
-                // 3. Attempt to log user into our system
+                // LOGIN
+                ////////////////////////////////////////////////////////////////////////////////
+                // Log user into our Identity Framework System 
+                //    a. User is authenticated against EEX
+                //    b. User is registered in our system
+                //    c. Attempt to log user into our system
                 ////////////////////////////////////////////////////////////////////////////////
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
