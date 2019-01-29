@@ -1,0 +1,11 @@
+From the command line (Windows/Mac/Linux):
+    cd to project root
+    dotnet publish -c release -r rhel-x64
+    
+From the Command Line (Mac/Linux):
+    cd bin/Release/netcoreapp2.1
+    tar cvf VLTPAuth.tar rhel-x64
+    gzip VLTPAuth.tar
+
+Updload VLTPAuth.zip (Windows) or VLTPAuth.tar.gz (Mac/Linux) to:
+\\e04tcv-CIFS02.ent.ds.gsa.gov\OCIO\DevDotNet\VLTP\VLTP-DEV

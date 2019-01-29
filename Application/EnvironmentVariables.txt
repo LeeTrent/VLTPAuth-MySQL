@@ -1,2 +1,0 @@
-export APPSETTINGS_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/MySQL"
-export LOGFILE_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/MySQL"
