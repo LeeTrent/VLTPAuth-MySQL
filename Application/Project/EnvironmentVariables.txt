@@ -1,7 +1,11 @@
 #########################################################################################
-# macOS and Linux
+# Lee's Mac
 #########################################################################################
 export APPSETTINGS_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/MySQL"
 export LOGFILE_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/MySQL"
+
+#########################################################################################
+# Test Environment Variables (macOS or Linux)
+#########################################################################################
 echo $APPSETTINGS_DIRECTORY
 echo $LOGFILE_DIRECTORY
