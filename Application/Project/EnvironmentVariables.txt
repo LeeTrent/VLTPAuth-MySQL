@@ -9,3 +9,15 @@ export LOGFILE_DIRECTORY="/Users/leetrent/Development/Software/GSA/HR/VLTPAuth/M
 #########################################################################################
 echo $APPSETTINGS_DIRECTORY
 echo $LOGFILE_DIRECTORY
+
+#########################################################################################
+# Lee's Win7
+#########################################################################################
+set APPSETTINGS_DIRECTORY=C:\Users\Lee\Dev\GSA\VLTP
+set LOGFILE_DIRECTORY=C:\Users\Lee\Dev\GSA\VLTP
+
+#########################################################################################
+# Test Environment Variables (Windows)
+#########################################################################################
+echo %APPSETTINGS_DIRECTORY%
+echo %LOGFILE_DIRECTORY%
