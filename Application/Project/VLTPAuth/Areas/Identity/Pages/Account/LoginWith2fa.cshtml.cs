@@ -16,11 +16,18 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly IEEXAuthService _eexAuthService;
 
-        public LoginWith2faModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2faModel> logger)
+        public LoginWith2faModel
+        (
+            SignInManager<IdentityUser> signInManager, 
+            ILogger<LoginWith2faModel> logger,
+            IEEXAuthService eexAuthService
+        )
         {
             _signInManager = signInManager;
             _logger = logger;
+            _eexAuthService = eexAuthService;
         }
 
         [BindProperty]

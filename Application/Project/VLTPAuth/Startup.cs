@@ -70,6 +70,12 @@ namespace VLTPAuth
             //////////////////////////////////////////////////////               
             services.AddScoped<IEEXAuthService, EEXAuthService>();  
             //////////////////////////////////////////////////////   
+
+            //////////////////////////////////////////////////////   
+            // Register Oracle Service
+            //////////////////////////////////////////////////////               
+            services.AddScoped<IOracleService, OracleService>();  
+            //////////////////////////////////////////////////////               
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
