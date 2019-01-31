@@ -120,7 +120,7 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
               if ( identityResult.Succeeded == false
                       && this.isDuplicateUser(identityResult.Errors) == false)
               {
-                  ModelState.AddModelError(string.Empty, "User registration attempt failed and use is not a duplicate user");
+                  ModelState.AddModelError(string.Empty, "User registration attempt failed and user is not a duplicate user");
                   ViewData["EEXAuthFailure"] = "User registration attempt / duplicate user check failed";
                    _logger.LogInformation("[Login][OnPost] => Returning to login page due to unsuccessful registration attempt/duplicate user check.");
                   return Page();                    
