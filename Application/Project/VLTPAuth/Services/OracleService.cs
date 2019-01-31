@@ -45,6 +45,7 @@ namespace VLTPAuth
                 cmd.Parameters.Add(userIdParam);
                 cmd.Parameters.Add(ssnParam);
 
+                _logger.LogInformation("[OracleService][InsertRow] => Calling cmd.ExecuteNonQuery() ...");
                 int execResult = cmd.ExecuteNonQuery();
                  _logger.LogInformation("[OracleService][InsertRow] => cmd.ExecuteNonQuery() returned: " + execResult);
             }

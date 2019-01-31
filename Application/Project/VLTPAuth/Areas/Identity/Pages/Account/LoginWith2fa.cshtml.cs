@@ -17,17 +17,20 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;
         private readonly IEEXAuthService _eexAuthService;
+        private readonly IOracleService _oracleService;
 
         public LoginWith2faModel
         (
             SignInManager<IdentityUser> signInManager, 
             ILogger<LoginWith2faModel> logger,
-            IEEXAuthService eexAuthService
+            IEEXAuthService eexAuthService,
+            IOracleService oracleService
         )
         {
             _signInManager = signInManager;
             _logger = logger;
             _eexAuthService = eexAuthService;
+            _oracleService = oracleService;
         }
 
         [BindProperty]
@@ -91,14 +94,23 @@ namespace VLTPAuth.Areas.Identity.Pages.Account
             
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
-                //return LocalRedirect(returnUrl);
-                 //return RedirectToPage("./LoginWith2faSuccess");
-                 //return Redirect("https://nytimes.com?ID=F9ADS79SD8AF9SAD8FF9S0");
-                // https://apps.ocfo.gsa.gov/ords/volta/volta.volta_main
-                //return Redirect("https://apps.ocfo.gsa.gov/ords/volta/volta.volta_main?id=A1DF8FDS989DDKJSHFDSJ");
-                
-                _logger.LogInformation("[LoginWith2fa][OnPost] => Calling _signInManager.SignOutAsync()");
+                _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);     
+
+                _logger.LogInformation("Calling OracleService to insert row into the VLTA.VLTP_AUTH table");   
+                _logger.LogInformation("Parameters passed: USER_ID={0}, SSN={1}", user.Id, user.UserName);   
+
+                /////////////////////////////////////////////////////////////////////////                
+                // OracleService
+                /////////////////////////////////////////////////////////////////////////                
+                // Calling OracleService to insert a row into the VLTA.VLTP_AUTH table
+                // Two (2) column values will be inserted: USER_ID and SSN
+                // IMPORTANT:
+                // VLTP_AUTH.USER_ID    maps to AspNetUsers.Id 
+                // VLTP_AUTH.SSN        maps to AspNetUser.UserName 
+                /////////////////////////////////////////////////////////////////////////
+                //_oracleService.InsertRow(user.Id, user.UserName);
+
+                _logger.LogInformation("[LoginWith2fa][OnPost] => Calling _signInManager.SignOutAsync()");               
                 await _signInManager.SignOutAsync();
                 
                 _logger.LogInformation("[LoginWith2fa][OnPost] => Redirecting to VLTP website");
