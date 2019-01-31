@@ -16,17 +16,20 @@ namespace VLTPAuth.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly IOracleService _oracleService;
 
         public ShowRecoveryCodesModel
         (
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,  
-            ILogger<LoginWith2faModel> logger
+            ILogger<LoginWith2faModel> logger,
+            IOracleService oracleService
         )
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
+            _oracleService = oracleService;
         }
 
         [TempData]
@@ -59,6 +62,20 @@ namespace VLTPAuth.Areas.Identity.Pages.Account.Manage
             {
                 throw new InvalidOperationException($"[ShowRecoveryCodesModel][OnPost] => Call to _userManager.GetUserAsync(User) returned null.");
             }
+
+            _logger.LogInformation("Calling OracleService to insert row into the VLTA.VLTP_AUTH table");   
+            _logger.LogInformation("Parameters passed: USER_ID={0}, SSN={1}", user.Id, user.UserName);   
+
+            /////////////////////////////////////////////////////////////////////////                
+            // OracleService
+            /////////////////////////////////////////////////////////////////////////                
+            // Calling OracleService to insert a row into the VLTA.VLTP_AUTH table
+            // Two (2) column values will be inserted: USER_ID and SSN
+            // IMPORTANT:
+            // VLTP_AUTH.USER_ID    maps to AspNetUsers.Id 
+            // VLTP_AUTH.SSN        maps to AspNetUser.UserName 
+            /////////////////////////////////////////////////////////////////////////
+            //_oracleService.InsertRow(user.Id, user.UserName);
 
             _logger.LogInformation("[ShowRecoveryCodesModel][OnPost] => Calling _signInManager.SignOutAsync()");
             await _signInManager.SignOutAsync();
