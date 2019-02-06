@@ -61,7 +61,7 @@ namespace VLTPAuth
         }
         finally
         {
-            if ( connString != null)
+            if ( conn != null)
             {
                 conn.Close();
             }
